@@ -1,0 +1,109 @@
+ul.events {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 2px 0;
+}
+
+ul.events li {
+    -webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
+    border-radius: 11px;
+    background: #eee;
+    border: 1px solid #ddd;
+    color: #000;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 6px;
+    padding: 3px 0;
+    position: relative;
+}
+
+ul.events li span {
+	margin-left: 10px;
+}
+
+ul.events li em {
+    color: #0000aa;
+    font-size: 0.9em;
+	margin-left: 4px;
+	background-color: #FFF100;
+	padding: 0px 2px;
+}
+
+ul.intervals {
+    list-style-type: none;
+    padding: 0;
+    display: block;
+	border-top: 1px dashed #ccc;
+}
+
+/* The width depends on the number of intervals. For example 100 / 7 = 14.29% -- then subtract a little bit for room for the borders */
+ul.intervals li {
+    border-right: 1px solid #ccc;
+    color: #999;
+    float: left;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 15px 0;
+    text-align: center;
+    width: 4.9%;
+}
+
+ul.intervals li.first {
+    border-left: 1px solid #ccc;
+}
+
+ul.intervals li.today {
+	background-color: #eee;
+}
+
+ul.events li.veg { background-color: #83C267; }		/* 1 */
+ul.events li.fruit { background-color: #F07F81; }	/* 2 */
+ul.events li.dairy { background-color: #BFD5FE; }	/* 3 */
+ul.events li.meat { background-color: #C63019; }	/* 4 */
+ul.events li.grain { background-color: #F4D01A; }	/* 5 */
+ul.events li.spice { background-color: #E0792F; }	/* 6 */
+ul.events li.prep { background-color: #A85ACD; }	/* 7 */
+ul.events li.oil { background-color: #FDF29D; }		/* 8 */
+
+.hidden { display: none; }
+
+div.ajout {
+	margin-top: 60px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+}
+
+div.ajout h2, div.modif h2 { margin: 0; padding: 0; }
+
+div.ajout form label,
+div.modif form label {
+	float: left;
+	width: 140px;
+	vertical-align: middle;
+	padding-top: 4px;
+}
+
+div.ajout form input,
+div.modif form input {
+	width: 140px;
+	min-height: 16px;
+	font-weight: bold;
+}
+
+div.ajout form select,
+div.modif form select {
+	width: 144px;
+	min-height: 16px;
+	font-weight: bold;
+}
+
+div.modif {
+	background-color: #fff;
+	border: 1px solid #000;
+	width: 300px;
+	position: absolute;
+	top: 50px;
+	left: 300px;
+	display: none;
+}
