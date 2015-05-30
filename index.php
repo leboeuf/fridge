@@ -1,6 +1,7 @@
 <?php
-	$c = new PDO('mysql:host=localhost;dbname=fridge', 'fridgedbuser', 'fridgedbpassword', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-	$stmtSelect = $c->query("SELECT * FROM fridge WHERE (DatePeremption >= NOW() OR DatePeremption IS NULL) AND Quantite > 0 ORDER BY TypeProduit");
+	require_once('db.php');
+
+	$stmtSelect = $db->query("SELECT * FROM fridge WHERE (date_peremption >= NOW() OR date_peremption IS NULL) AND quantite > 0 ORDER BY type_produit");
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,14 +17,14 @@
 				while ($row = $stmtSelect->fetch(PDO::FETCH_ASSOC))
 				{
 					$left = "";
-					if ($row['DatePeremption'] == null) $width = 100; // Produit n'expire jamais.
+					if ($row['date_peremption'] == null) $width = 100; // Produit n'expire jamais.
 					else
 					{
 						// Calculer le nombre de jour d'ici la date d'expiration.
-						$exp = datediff($row['DatePeremption'], date('Y-m-d')) + 2;// +2 pcq on commence un jour avant et la différence enlève 1 jour.
+						$exp = datediff($row['date_peremption'], date('Y-m-d')) + 2;// +2 pcq on commence un jour avant et la différence enlève 1 jour.
 						$width = $exp / 20 * 100; // Taille de la barre pour ce produit.
 					}
-					if ($row['DateAchat'] == date('Y-m-d'))
+					if ($row['date_achat'] == date('Y-m-d'))
 					{
 						// Si le produit a été acheté aujourd'hui, placer une journée plus tard que le début.
 						$width -= 5; // Enlever une journée.
@@ -32,13 +33,13 @@
 					}
 					else if ($width > 100) $width = 100; // Produit expire après la dernière date affichée.
 					
-					echo '<li class="' . getClassFromType($row['TypeProduit']) . '" style="width:' . $width . '%' . $left . '">';
-					echo '<span>' . $row['NomProduit'];
-					echo '<em>' . $row['Quantite'] . '</em>';
+					echo '<li class="' . getClassFromType($row['type_produit']) . '" style="width:' . $width . '%' . $left . '">';
+					echo '<span>' . $row['nom_produit'];
+					echo '<em>' . $row['quantite'] . '</em>';
 					echo '</span>';
-					echo '<span class="hidden dateachat">' . $row['DateAchat'] . '</span>';
-					echo '<span class="hidden dateperemption">' . $row['DatePeremption'] . '</span>';
-					echo '<span class="hidden ID">' . $row['ID'] . '</span>';
+					echo '<span class="hidden dateachat">' . $row['date_achat'] . '</span>';
+					echo '<span class="hidden dateperemption">' . $row['date_peremption'] . '</span>';
+					echo '<span class="hidden ID">' . $row['id'] . '</span>';
 					echo '</li>';
 				}
 			?>

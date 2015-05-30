@@ -1,17 +1,26 @@
 <?php
-	$c = new PDO('mysql:host=localhost;dbname=fridge', 'fridgedbuser', 'fridgedbpassword', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-	$stmtInsert = $c->prepare("
-		INSERT INTO fridge (NomProduit, TypeProduit, DateAchat, DatePeremption, Quantite) 
-		VALUES (:NomProduit, :TypeProduit, :DateAchat, :DatePeremption, :Quantite)"
+	require_once('db.php');
+
+	$stmtInsert = $db->prepare("
+		INSERT INTO fridge (nom_produit, type_produit, date_achat, date_peremption, quantite) 
+		VALUES (:nom_produit, :type_produit, :date_achat, :date_peremption, :quantite)"
 	);
-		
-	$stmtInsert->execute(array(
-		"NomProduit" => $_POST['NomProduit'],
-		"TypeProduit" => $_POST['TypeProduit'],
-		"DateAchat" => $_POST['DateAchat'],
-		"DatePeremption" => $_POST['DatePeremption'],
-		"Quantite" => $_POST['Quantite']
-	));
 	
-	header('Location: index.php');
+	try
+	{
+		$stmtInsert->execute(array(
+			"nom_produit" => $_POST['NomProduit'],
+			"type_produit" => $_POST['TypeProduit'],
+			"date_achat" => $_POST['DateAchat'],
+			"date_peremption" => $_POST['DatePeremption'],
+			"quantite" => $_POST['Quantite']
+		));
+
+		header('Location: index.php');
+
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
 ?>

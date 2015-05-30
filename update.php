@@ -1,23 +1,32 @@
 <?php
-	$c = new PDO('mysql:host=localhost;dbname=fridge', 'fridgedbuser', 'fridgedbpassword', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-	$stmtUpdate = $c->prepare("
+	require_once('db.php');
+
+	$stmtUpdate = $db->prepare("
 		UPDATE fridge SET
-			NomProduit = :NomProduit,
-			TypeProduit = :TypeProduit,
-			DateAchat = :DateAchat,
-			DatePeremption = :DatePeremption,
-			Quantite = :Quantite
+			nom_produit = :nom_produit,
+			type_produit = :type_produit,
+			date_achat = :date_achat,
+			date_peremption = :date_peremption,
+			quantite = :quantite
 		WHERE ID = :ID"
 	);
-		
-	$stmtUpdate->execute(array(
-		"NomProduit" => $_POST['NomProduit'],
-		"TypeProduit" => $_POST['TypeProduit'],
-		"DateAchat" => $_POST['DateAchat'],
-		"DatePeremption" => $_POST['DatePeremption'],
-		"Quantite" => $_POST['Quantite'],
+	
+	try
+	{
+		$stmtUpdate->execute(array(
+		"nom_produit" => $_POST['NomProduit'],
+		"type_produit" => $_POST['TypeProduit'],
+		"date_achat" => $_POST['DateAchat'],
+		"date_peremption" => $_POST['DatePeremption'],
+		"quantite" => $_POST['Quantite'],
 		"ID" => $_POST['ID']
 	));
 	
 	header('Location: index.php');
+
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
 ?>
