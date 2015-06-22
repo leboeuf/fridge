@@ -5,6 +5,7 @@
 	{
 		$sql = "CREATE TABLE IF NOT EXISTS fridge (
 			id SERIAL PRIMARY KEY,
+			fridge_id DATE NOT NULL,
 			date_peremption DATE NOT NULL,
 			date_achat DATE NOT NULL,
 			nom_produit VARCHAR(80) NOT NULL,

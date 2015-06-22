@@ -84,6 +84,11 @@
 				<option value="7">Pr&eacute;par&eacute;</option>
 				<option value="8">Huile</option>
 			</select><br/>
+			<label>Fridge Id:</label>
+			<select name="FridgeId">
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
 			<label>Date d'achat:</label>
 			<input type="text" name="DateAchat" value="<?php echo date('Y-m-d'); ?>" /><br/>
 			<label>Date de p&eacute;remption:</label>
@@ -118,6 +123,7 @@
 			<input type="submit" value="Modifier" /><br/>
 			<input type="button" value="Annuler" onclick="$('div.modif').hide();" /><br/>
 			<input type="hidden" name="ID" value=""/>
+			<input type="hidden" name="FridgeId" value=""/>
 		</form>
 	</div>
 	

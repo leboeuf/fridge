@@ -3,6 +3,7 @@
 
 	$stmtUpdate = $db->prepare("
 		UPDATE fridge SET
+			fridge_id = :fridge_id,
 			nom_produit = :nom_produit,
 			type_produit = :type_produit,
 			date_achat = :date_achat,
@@ -14,6 +15,7 @@
 	try
 	{
 		$stmtUpdate->execute(array(
+		"fridge_id" => $_POST['FridgeId'],
 		"nom_produit" => $_POST['NomProduit'],
 		"type_produit" => $_POST['TypeProduit'],
 		"date_achat" => $_POST['DateAchat'],
